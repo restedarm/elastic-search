@@ -1,0 +1,29 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Car {
+  id: Int!
+  name: String!
+  numbers: String!
+  color: String!
+  services: [Service!]!
+}
+
+type Service {
+  id: Int!
+  name: String!
+  cars: [Car!]!
+}
+
+type User {
+  id: Int!
+  fullName: String!
+  birthdayDate: String!
+  carId: Int!
+  car: Car
+}
+
+type Query {
+  users: [User!]!
+}
