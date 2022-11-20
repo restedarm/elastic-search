@@ -24,13 +24,13 @@ model Car {
   numbers    String         
   color      String
   user       User?
-  carsOnServices CarsOnServices[]        
+  carsOnServices CarsOnServices[]     
 }
 
 model Service {
   id         Int      @id @default(autoincrement())
   name       String   @unique
-  carsOnServices CarsOnServices[]        
+  carsOnServices CarsOnServices[]   
 }
 
 model CarsOnServices {

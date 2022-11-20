@@ -6,6 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "prisma:push": "docker compose exec nodeserver npx prisma db push",
+    "prisma:generate": "docker compose exec nodeserver npx prisma generate",
+    "prisma:seed": "docker compose exec nodeserver npx prisma db seed",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,11 +24,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@nestjs/apollo": "^10.1.6",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/graphql": "^10.1.6",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^3.0.0",
     "@prisma/client": "^4.6.1",
     "apollo-server-express": "^3.11.1",
     "graphql": "^16.6.0",
@@ -56,6 +61,10 @@
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.1.0",
     "typescript": "^4.7.4"
+  },
+  "prisma": {
+    "seed": "ts-node src/prisma/seed.ts",
+    "schema": "src/prisma/schema.prisma"
   },
   "jest": {
     "moduleFileExtensions": [

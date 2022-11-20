@@ -1,24 +1,15 @@
-import { Parent, Query, ResolveField } from '@nestjs/graphql';
-import { Args, Int, Resolver } from '@nestjs/graphql';
-import { CarService } from '../car/car.service';
-import { Car } from '../car/models/car.model';
+import { Args, Query } from '@nestjs/graphql';
+import { Resolver } from '@nestjs/graphql';
 import { User } from './models/user.model';
 import { UserService } from './user.service';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(
-    private userService: UserService,
-    private carService: CarService,
-  ) {}
+  constructor(private userService: UserService) {}
   @Query(() => [User])
-  async users() {
-    return this.userService.getAll();
-  }
-
-  @ResolveField(() => Car)
-  async car(@Parent() user: User) {
-    const { carId } = user;
-    return this.carService.get({ id: carId });
+  async users(
+    @Args('search', { type: () => String, nullable: true }) search?: string,
+  ) {
+    return this.userService.getAll(search);
   }
 }

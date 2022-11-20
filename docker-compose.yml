@@ -13,6 +13,7 @@ services:
       - 3306:3306
     volumes:
       - my-db:/var/lib/mysql
+      - ./.mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
   nodeserver:
     image: nodeserver
     build:
